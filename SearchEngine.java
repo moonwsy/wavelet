@@ -17,19 +17,23 @@ class Handler implements URLHandler {
             if (url.getPath().contains("/add")) {
                 String[] parameters = url.getQuery().split("=");
                 query.add(parameters[1]);
-                return ("");
+                return ("added successfully");
             }
+            
         }
         else if (url.getPath().contains("/search")){
             String[] parameters = url.getQuery().split("=");
+            ArrayList<String> query1 = new ArrayList<String>();
             for(String i: query){
                 // System.out.println(i);
                 // boolean found = query.stream().anyMatch(s -> s.contains(parameters[1]));
                 if(i.contains(parameters[1])){
                     // System.out.println(i);
-                    return String.format(i);
+                    query1.add(i);
+                    //return String.format(i);
                 }
             }
+            return query1.toString();
         }
         return "404 Not Found!";
     }
@@ -37,6 +41,8 @@ class Handler implements URLHandler {
 
 class SearchEngine {
     public static void main(String[] args) throws IOException {
+    
+        
         if(args.length == 0){
             System.out.println("Missing port number! Try any number between 1024 to 49151");
             return;
