@@ -9,7 +9,7 @@ class Handler implements URLHandler {
     ArrayList<String> query = new ArrayList<String>();
     public String handleRequest(URI url) {
         if (url.getPath().equals("/")) {
-            return String.format("Number: %d", num);
+            return String.format("Missing query");
         } 
         
         else if(url.getPath().contains("/add")){
@@ -17,16 +17,18 @@ class Handler implements URLHandler {
             if (url.getPath().contains("/add")) {
                 String[] parameters = url.getQuery().split("=");
                 query.add(parameters[1]);
+                return ("");
             }
         }
         else if (url.getPath().contains("/search")){
             String[] parameters = url.getQuery().split("=");
-            int count = 0;
-            while(query.size() > count){
-                if (query.contains(parameters[1])){
-                    return String.format(query.get(count));
+            for(String i: query){
+                // System.out.println(i);
+                // boolean found = query.stream().anyMatch(s -> s.contains(parameters[1]));
+                if(i.contains(parameters[1])){
+                    // System.out.println(i);
+                    return String.format(i);
                 }
-                count ++;
             }
         }
         return "404 Not Found!";
