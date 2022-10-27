@@ -33,7 +33,9 @@ class Handler implements URLHandler {
                     //return String.format(i);
                 }
             }
-            return query1.toString();
+            // query1.toString();
+            String delimiter = " ";
+            return String.join(delimiter, query1.toString());
         }
         return "404 Not Found!";
     }
